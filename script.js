@@ -7,9 +7,38 @@ const cardObjectDefinitions = [
 
 const cardBackImgPath = '/pictures/card-back-Blue.png'
 const cardContainerElem = document.querySelector('.card-container')
+let cards = []
+const playGameButtonElem = document.getElementById('playGame')
 
-createCards()
+loadGame()
 
+function loadGame() {
+    createCards()
+
+    cards = document.querySelectorAll('.card')
+
+    playGameButtonElem.addEventListener('click', ()=>startGame())
+}
+
+function startGame(){
+    initializeNewGame()
+    startRound()
+}
+
+function initializeNewGame() {
+}
+
+function startRound(){
+    initializeNewRound()
+}
+
+function initializeNewRound(){
+}
+
+
+
+
+// ////////////////////////////////////// Create Cards ////////////////////////////////////////////////////////////////
 function createCards(){
     cardObjectDefinitions.forEach((cardItem)=>{
         createCard(cardItem)
