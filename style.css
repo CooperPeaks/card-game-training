@@ -1,23 +1,23 @@
 /* Variables CSS */
-:root{
+:root {
     --card-width: 157px;
     --card-height: 220px;
-    --num-cards: 4; 
+    --num-cards: 4;
     --card-horizontal-space: 100px;
 }
 
-body{
+body {
     height: 100vh;
 }
 
-main{
-   height: 55%;
-   display: flex;
-   justify-content: center; 
-   border: 1px solid black;
+main {
+    height: 55%;
+    display: flex;
+    justify-content: center;
+    border: 1px solid black;
 }
 
-.card-container{
+.card-container {
     position: relative;
     height: 100%;
     width: calc(var(--card-width)* (var(--num-cards) / 2) + var(--card-horizontal-space));
@@ -26,36 +26,39 @@ main{
     grid-template-rows: 1fr 1fr;
     grid-template-areas: "a b" "c d";
     border: 1px solid black;
-
 }
 
-.card-pos-a{
+.card-pos-a {
     grid-area: a;
     border: 1px solid black;
     background-color: gray;
 }
 
-.card-pos-b{
+.card-pos-b {
     grid-area: b;
     border: 1px solid black;
     background-color: goldenrod;
 }
 
-.card-pos-c{
+.card-pos-c {
     grid-area: c;
     border: 1px solid black;
     background-color: blueviolet;
-
 }
 
-.card-pos-d{
+.card-pos-d {
     grid-area: d;
     border: 1px solid black;
     background-color: greenyellow;
-
 }
 
-.card{
+.card-pos-a, .card-pos-b, .card-pos-c, .card-pos-d{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
     position: absolute;
     height: var(--card-height);
     width: var(--card-width);
@@ -63,7 +66,7 @@ main{
     cursor: pointer;
 }
 
-.card-inner{
+.card-inner {
     position: relative;
     width: 100%;
     height: 100%;
@@ -72,21 +75,22 @@ main{
     transform-style: preserve-3d;
 }
 
-.card-front, .card-back{
+.card-front,
+.card-back {
     position: absolute;
     width: 100%;
     height: 100%;
     backface-visibility: hidden;
 }
 
-.card img{
+.card img {
     height: 100%;
 }
 
-.card-back{
+.card-back {
     transform: rotateY(180deg);
 }
 
-.card:hover .card-inner{
+.card:hover .card-inner {
     transform: rotateY(180deg);
 }
