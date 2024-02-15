@@ -7,20 +7,22 @@ const cardObjectDefinitions = [
 
 const cardBackImgPath = '/pictures/card-back-Blue.png'
 const cardContainerElem = document.querySelector('.card-container')
+
 let cards = []
 const playGameButtonElem = document.getElementById('playGame')
+
+const collapsedGridAreaTemplate = '"a a" "a a"'
+const cardCollectionCellClass = ".card-pos-a"
 
 loadGame()
 
 function loadGame() {
     createCards()
-
     cards = document.querySelectorAll('.card')
-
-    playGameButtonElem.addEventListener('click', ()=>startGame())
+    playGameButtonElem.addEventListener('click', () => startGame())
 }
 
-function startGame(){
+function startGame() {
     initializeNewGame()
     startRound()
 }
@@ -28,19 +30,54 @@ function startGame(){
 function initializeNewGame() {
 }
 
-function startRound(){
+function startRound() {
     initializeNewRound()
+    collectCards()
+    flipCards(true)
 }
 
-function initializeNewRound(){
+function initializeNewRound() {
 }
 
+// ////////////////////////////////////// Handle Cards //////////////////////////////////////////////////////////////////
 
+function collectCards() {
+    transformGridArea(collapsedGridAreaTemplate)
+    addCardToGridAreaCell(cardCollectionCellClass)
+}
 
+function transformGridArea(areas) {
+    cardContainerElem.style.gridTemplateAreas = areas
+}
 
+function addCardToGridAreaCell(cellPositionClassName) {
+    const cellPositionElem = document.querySelector(cellPositionClassName)
+    cards.forEach((card, index) => {
+        addChildElement(cellPositionElem, card)
+    })
+}
+
+// Flip Card Effect
+function flipCard(card, flipToBack) {
+    const innerCardElem = card.firstChild
+    if (flipToBack && !innerCardElem.classList.contains('flip-it')) {
+        innerCardElem.classList.add('flip-it')
+    }
+    else if (innerCardElem.classList.contains('flip-it')) {
+        innerCardElem.classList.remove('flip-it')
+    }
+}
+
+function flipCards(flipToBack) {
+    cards.forEach((card, index) => {
+        setTimeout(() => {
+            flipCard(card, flipToBack)
+        }, index * 100)
+    })
+}
 // ////////////////////////////////////// Create Cards ////////////////////////////////////////////////////////////////
-function createCards(){
-    cardObjectDefinitions.forEach((cardItem)=>{
+function createCards() {
+    cardObjectDefinitions.forEach((cardItem) => {
         createCard(cardItem)
     })
 }
